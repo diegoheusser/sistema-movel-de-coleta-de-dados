@@ -3,6 +3,8 @@ package br.heusser.sistemamoveldecoletadedados.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.heusser.sistemamoveldecoletadedados.dao.hsqldb.Fabrica;
+
 public class Pesquisador {
 
 	private int codigo;
@@ -57,6 +59,11 @@ public class Pesquisador {
 
 	public void setFontes(List<Fonte> fontes) {
 		this.fontes = fontes;
+	}
+	
+	public static List<Pesquisador> listarTodos(){
+		br.heusser.sistemamoveldecoletadedados.dao.pesquisador.Pesquisador p = Fabrica.getInstancia().getPesquisador();
+		return p.listarTodos();
 	}
 
 }
