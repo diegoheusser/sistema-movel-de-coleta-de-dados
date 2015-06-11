@@ -1,9 +1,9 @@
-package br.heusser.sistemamoveldecoletadedados.modelo;
+package br.udesc.ceavi.sistemamoveldecoletadedados.modelo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.heusser.sistemamoveldecoletadedados.dao.hsqldb.Fabrica;
+import br.udesc.ceavi.sistemamoveldecoletadedados.dao.hsqldb.Fabrica;
 
 public class Pesquisador {
 
@@ -62,7 +62,7 @@ public class Pesquisador {
 	}
 	
 	public static List<Pesquisador> listarTodos(){
-		br.heusser.sistemamoveldecoletadedados.dao.pesquisador.Pesquisador p = Fabrica.getInstancia().getPesquisador();
+		br.udesc.ceavi.sistemamoveldecoletadedados.dao.pesquisador.Pesquisador p = Fabrica.getInstancia().getPesquisador();
 		return p.listarTodos();
 	}
 

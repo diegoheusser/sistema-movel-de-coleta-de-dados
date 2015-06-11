@@ -1,4 +1,4 @@
-package br.heusser.sistemamoveldecoletadedados.dao.hsqldb;
+package br.udesc.ceavi.sistemamoveldecoletadedados.dao.hsqldb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,5 +1,6 @@
-package br.heusser.sistemamoveldecoletadedados;
+package br.udesc.ceavi.sistemamoveldecoletadedados;
 
+import br.udesc.ceavi.sistemamoveldecoletadedados.R;
 import android.app.Activity;
 import android.os.Bundle;
 

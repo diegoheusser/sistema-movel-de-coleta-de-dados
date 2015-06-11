@@ -1,4 +1,4 @@
-package br.heusser.sistemamoveldecoletadedados.modelo;
+package br.udesc.ceavi.sistemamoveldecoletadedados.modelo;
 
 import java.util.Date;
 
