@@ -10,7 +10,7 @@ public class Conexao {
 	public static Connection getConexao(){
 		try{
 			Class.forName("org.hsqldb.jdbc.JDBCDriver");
-			return DriverManager.getConnection("jdbc:hsqldb:file:db/custo-vida-movel", "SA", "");
+			return DriverManager.getConnection("jdbc:hsqldb:file:/custo-vida-movel/data", "SA", "");
 		} catch(ClassNotFoundException ex){
 		} catch (SQLException e) {
 		}

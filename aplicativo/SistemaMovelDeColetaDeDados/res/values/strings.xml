@@ -2,6 +2,10 @@
 <resources>
 
     <string name="app_name">Sistema Móvel de Coleta de Dados</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_pesquisa_controle">Research</string>
+    <string name="custom_dialog_option_open">Open</string>
+    <string name="custom_dialog_option_send">Send</string>
+    <string name="custom_dialog_option_title">What do you want to do?</string>
+    <string name="menu_research_update">Update</string>
 
 </resources>
