@@ -7,5 +7,7 @@
     <string name="custom_dialog_option_send">Send</string>
     <string name="custom_dialog_option_title">What do you want to do?</string>
     <string name="menu_research_update">Update</string>
+    <string name="title_activity_pesquisas">Pesquisas</string>
+    <string name="Save">Save</string>
 
 </resources>
