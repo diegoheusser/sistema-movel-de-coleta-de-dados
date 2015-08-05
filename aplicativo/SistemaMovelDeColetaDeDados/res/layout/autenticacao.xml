@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	<LinearLayout 
+	    android:id="@+id/autenticacao_linear_layout_1"
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="2"
+    	android:orientation="vertical">
+	   
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="1"
+    	android:orientation="vertical">
+    	
+	    <EditText 
+	        android:id="@+id/autenticacao_edit_text_usuario"
+	        android:layout_width="300dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:layout_marginTop="20dp"
+	        android:hint="@string/autenticacao_edit_text_usuario"/>
+	    
+	    <EditText 
+	        android:id="@+id/autenticacao_edit_text_senha"
+	        android:layout_width="300dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:hint="@string/autenticacao_edit_text_senha"/>
+	    
+	    <Button 
+	        android:id="@+id/autenticacao_button_entrar"
+	        android:layout_width="300dp"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center"
+	        android:text="@string/autenticacao_button_entrar"/>
+	    
+	</LinearLayout>
+	
+	<LinearLayout 
+	    android:id="@+id/autenticacao_linear_layout_2"
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:layout_weight="2"
+    	android:orientation="vertical">
+	   
+	</LinearLayout>
+
+</LinearLayout>

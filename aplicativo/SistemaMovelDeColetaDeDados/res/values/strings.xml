@@ -2,12 +2,16 @@
 <resources>
 
     <string name="app_name">Sistema Móvel de Coleta de Dados</string>
-    <string name="title_activity_pesquisa_controle">Research</string>
-    <string name="custom_dialog_option_open">Open</string>
-    <string name="custom_dialog_option_send">Send</string>
-    <string name="custom_dialog_option_title">What do you want to do?</string>
-    <string name="menu_research_update">Update</string>
+    <string name="title_activity_pesquisa_controle">Pesquisas</string>
+    <string name="custom_dialog_option_open">Abrir</string>
+    <string name="custom_dialog_option_send">Enviar</string>
+    <string name="custom_dialog_option_title">O que você deseja fazer?</string>
+    <string name="menu_research_update">Atualizar</string>
     <string name="title_activity_pesquisas">Pesquisas</string>
-    <string name="Save">Save</string>
+    <string name="Save">Salvar</string>
+    
+    <string name="autenticacao_edit_text_usuario">Usuário</string>
+    <string name="autenticacao_edit_text_senha">Senha</string>
+    <string name="autenticacao_button_entrar">Entrar</string>
 
 </resources>
