@@ -14,17 +14,22 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.udesc.ceavi.sistemamoveldecoletadedados.activity.PesquisaControle"
+            android:name="br.udesc.ceavi.sistemamoveldecoletadedados.activity.ControlActivity"
             android:label="@string/title_activity_pesquisa_controle" >
+
+        </activity>
+        <activity
+            android:name="br.udesc.ceavi.sistemamoveldecoletadedados.activity.Pesquisas"
+            android:label="@string/title_activity_pesquisas" >
+        </activity>
+        <activity 
+            android:name="br.udesc.ceavi.sistemamoveldecoletadedados.activity.MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="br.udesc.ceavi.sistemamoveldecoletadedados.activity.Pesquisas"
-            android:label="@string/title_activity_pesquisas" >
         </activity>
     </application>
 

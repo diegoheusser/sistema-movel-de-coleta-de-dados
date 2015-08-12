@@ -9,29 +9,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import br.heusser.sistemamoveldecoletadedados.R;
+import br.udesc.ceavi.sistemamoveldecoletadedados.model.Control;
 
-public class PesquisaControle extends BaseAdapter {
+public class ControlAdapter extends BaseAdapter {
 
 	private Context context;
-	private List<br.udesc.ceavi.sistemamoveldecoletadedados.modelo.PesquisaControle> itens;
+	private List<Control> list;
 
 
-	public PesquisaControle(
-			Context context,
-			List<br.udesc.ceavi.sistemamoveldecoletadedados.modelo.PesquisaControle> itens) {
+	public ControlAdapter(Context context,List<Control> list) {
 		super();
 		this.context = context;
-		this.itens = itens;
+		this.list = list;
 	}
 
 	@Override
 	public int getCount() {
-		return itens.size();
+		return list.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return itens.get(position);
+		return list.get(position);
 	}
 
 	@Override
@@ -41,15 +40,15 @@ public class PesquisaControle extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		br.udesc.ceavi.sistemamoveldecoletadedados.modelo.PesquisaControle item = itens.get(position);
+		Control control = list.get(position);
 		LayoutInflater inflater = 
 				(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(R.layout.item_list, null);
 		TextView name = (TextView) v.findViewById(R.id.name);
-		name.setText(item.getFonte().getNome());
+		name.setText(control.getSource().getDescription());
 		
 		TextView location = (TextView) v.findViewById(R.id.location);
-		location.setText(item.getFonte().getLocalizacao());
+		location.setText(control.getSource().getLocalization());
 		
 		return v;
 	}
