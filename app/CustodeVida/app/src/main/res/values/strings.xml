@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Custo de Vida</string>
+
+    <string name="login_edit_text_user">Usuário</string>
+    <string name="login_edit_text_password">Senha</string>
+    <string name="login_button_login">Entrar</string>
+
+    <string name="custom_dialog_option_title">O que você deseja fazer?</string>
+    <string name="custom_dialog_option_open">Abrir</string>
+    <string name="custom_dialog_option_send">Enviar</string>
+
+    <string name="menu_research_update">Atualizar</string>
+
+
+</resources>
