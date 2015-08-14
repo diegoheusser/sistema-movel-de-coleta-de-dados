@@ -2,7 +2,7 @@ package br.udesc.ceavi.sistemamoveldecoletadedados.model;
 
 import java.util.Date;
 
-public class Research {
+public class Search {
 
 	private int id;
 	private Date oldDate;

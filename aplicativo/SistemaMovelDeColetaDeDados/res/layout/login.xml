@@ -5,7 +5,7 @@
     android:orientation="vertical" >
     
 	<LinearLayout 
-	    android:id="@+id/autenticacao_linear_layout_1"
+	    android:id="@+id/login_linear_layout_1"
 	    android:layout_width="match_parent"
     	android:layout_height="match_parent"
     	android:layout_weight="2"
@@ -20,31 +20,32 @@
     	android:orientation="vertical">
     	
 	    <EditText 
-	        android:id="@+id/autenticacao_edit_text_usuario"
+	        android:id="@+id/login_edit_text_user"
 	        android:layout_width="300dp"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
 	        android:layout_marginTop="20dp"
-	        android:hint="@string/autenticacao_edit_text_usuario"/>
+	        android:hint="@string/login_edit_text_user"/>
 	    
 	    <EditText 
-	        android:id="@+id/autenticacao_edit_text_senha"
+	        android:id="@+id/login_edit_text_password"
+	        android:inputType="textPassword"
 	        android:layout_width="300dp"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
-	        android:hint="@string/autenticacao_edit_text_senha"/>
+	        android:hint="@string/login_edit_text_password"/>
 	    
 	    <Button 
-	        android:id="@+id/autenticacao_button_entrar"
+	        android:id="@+id/login_button_login"
 	        android:layout_width="300dp"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center"
-	        android:text="@string/autenticacao_button_entrar"/>
+	        android:text="@string/login_button_login"/>
 	    
 	</LinearLayout>
 	
 	<LinearLayout 
-	    android:id="@+id/autenticacao_linear_layout_2"
+	    android:id="@+id/login_linear_layout_2"
 	    android:layout_width="match_parent"
     	android:layout_height="match_parent"
     	android:layout_weight="2"

@@ -43,11 +43,16 @@ public class ControlAdapter extends BaseAdapter {
 		Control control = list.get(position);
 		LayoutInflater inflater = 
 				(LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.item_list, null);
-		TextView name = (TextView) v.findViewById(R.id.name);
-		name.setText(control.getSource().getDescription());
+
+		View v = inflater.inflate(R.layout.control_list, null);
 		
-		TextView location = (TextView) v.findViewById(R.id.location);
+		TextView percentage = (TextView) v.findViewById(R.id.control_list_text_view_percentage);
+		percentage.setText(control.getPercentage()+"%");
+		
+		TextView description = (TextView) v.findViewById(R.id.control_list_text_view_description);
+		description.setText(control.getSource().getDescription());
+		
+		TextView location = (TextView) v.findViewById(R.id.control_list_text_view_location);
 		location.setText(control.getSource().getLocalization());
 		
 		return v;

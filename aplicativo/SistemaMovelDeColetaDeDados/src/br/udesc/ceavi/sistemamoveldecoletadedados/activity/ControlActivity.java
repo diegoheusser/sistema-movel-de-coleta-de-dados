@@ -94,6 +94,7 @@ public class ControlActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.research, menu);
+		getActionBar().setBackgroundDrawable(R.drawable.primary);
 		return true;
 	}
 
