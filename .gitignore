@@ -67,3 +67,9 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+/web-service/CustoVidaWebService/nbproject/private/
+/web-service/CustoVidaService/nbproject/private/
+/web-service/CustoVidaServiceTest/nbproject/private/
+/web-service/CustoVidaService/dist/
+/web-service/CustoVidaServiceTest/dist/
+/web-service/CustoVidaWebService/dist/
