@@ -1,30 +1,14 @@
-package br.udesc.ceavi.custovida.model;
+package br.udesc.ceavi.custodevida.model;
 
-import br.udesc.ceavi.custovida.dao.control.ControlDAO;
-import br.udesc.ceavi.custovida.dao.core.DAOFactory;
 import java.util.Date;
-import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Control {
 
     private int id;
     private Date emissionDate;
-    private Date deliveryDate;
     private int percentage;
     private Source source;
     private Researcher researcher;
-    
-    public static List<Control> seekControlsByResearcher(int researcherId) throws Exception{
-        ControlDAO dao = DAOFactory.getInstance().getControlDAO();
-        return dao.seekControlsByResearcher(researcherId);
-    }
-    
-    public void update() throws Exception {
-        ControlDAO dao = DAOFactory.getInstance().getControlDAO();
-        dao.update(deliveryDate, id);
-    }
 
     public int getId() {
         return id;
@@ -65,13 +49,4 @@ public class Control {
     public void setResearcher(Researcher researcher) {
         this.researcher = researcher;
     }
-
-    public Date getDeliveryDate() {
-        return deliveryDate;
-    }
-
-    public void setDeliveryDate(Date deliveryDate) {
-        this.deliveryDate = deliveryDate;
-    }
-    
 }

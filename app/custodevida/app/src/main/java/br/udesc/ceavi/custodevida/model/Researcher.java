@@ -1,8 +1,6 @@
-package br.udesc.ceavi.custovida.model;
+package br.udesc.ceavi.custodevida.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Researcher {
 
     private int id;

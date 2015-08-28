@@ -1,13 +1,10 @@
-package br.udesc.ceavi.custovida.model;
+package br.udesc.ceavi.custodevida.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-@XmlRootElement
-public class Item {
+public class Source {
 
     private int id;
     private String description;
-    private int identifier;
+    private String localization;
 
     public int getId() {
         return id;
@@ -25,11 +22,11 @@ public class Item {
         this.description = description;
     }
 
-    public int getIdentifier() {
-        return identifier;
+    public String getLocalization() {
+        return localization;
     }
 
-    public void setIdentifier(int identifier) {
-        this.identifier = identifier;
+    public void setLocalization(String localization) {
+        this.localization = localization;
     }
 }

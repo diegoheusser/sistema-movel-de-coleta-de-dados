@@ -1,9 +1,7 @@
-package br.udesc.ceavi.custovida.model;
+package br.udesc.ceavi.custodevida.model;
 
 import java.util.Date;
-import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Search {
 
     private int id;

@@ -1,5 +1,8 @@
-package br.udesc.ceavi.custodevida.model;
+package br.udesc.ceavi.custovida.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Source {
 
     private int id;
