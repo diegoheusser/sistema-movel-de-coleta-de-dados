@@ -1,9 +1,11 @@
 package br.udesc.ceavi.custodevida;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -20,23 +22,17 @@ public class SplashActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new PreFetchData().execute();
+        new ResearchersAsyncTask().execute();
     }
 
-    private class PreFetchData extends AsyncTask<Void, Void, Void> {
+    private class ResearchersAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
             Gson gson = new Gson();
-            return null;
-        }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Intent i = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(i);
-            finish();
+
+            return null;
         }
     }
 }
