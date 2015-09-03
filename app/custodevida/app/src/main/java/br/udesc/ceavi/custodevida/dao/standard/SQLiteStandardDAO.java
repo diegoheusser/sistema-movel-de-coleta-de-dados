@@ -29,7 +29,7 @@ public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO
     protected abstract ContentValues getContentValues(T t);
 
     @Override
-    public void insert(T t) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void insert(T t){
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = getContentValues(t);
@@ -43,7 +43,7 @@ public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO
     }
 
     @Override
-    public List<T> seekAll() throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, ParseException {
+    public List<T> seekAll(){
 
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

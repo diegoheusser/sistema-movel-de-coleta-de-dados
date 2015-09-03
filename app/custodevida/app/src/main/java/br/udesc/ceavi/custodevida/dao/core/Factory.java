@@ -6,9 +6,10 @@ import br.udesc.ceavi.custodevida.dao.researcher.ResearcherDAO;
 
 public abstract class Factory {
 
-    protected Context context;
+    protected static Context context;
 
-    public static Factory getInstance(){
+    public static Factory getInstance(Context context){
+        Factory.context = context;
         return new br.udesc.ceavi.custodevida.dao.sqlite.Factory();
     }
 

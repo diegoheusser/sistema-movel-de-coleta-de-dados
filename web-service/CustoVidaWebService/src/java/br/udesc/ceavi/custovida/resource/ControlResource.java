@@ -31,7 +31,7 @@ public class ControlResource {
     }
 
     @GET
-    @Path("list_controls")
+    @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Control> getListControls() {
         

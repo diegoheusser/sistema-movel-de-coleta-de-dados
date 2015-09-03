@@ -1,6 +1,13 @@
 package br.udesc.ceavi.custodevida.model;
 
 
+import android.content.Context;
+
+import java.util.List;
+
+import br.udesc.ceavi.custodevida.dao.core.Factory;
+import br.udesc.ceavi.custodevida.dao.researcher.ResearcherDAO;
+
 public class Researcher {
 
     private int id;
@@ -38,5 +45,15 @@ public class Researcher {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void save(Context context){
+        ResearcherDAO dao = Factory.getInstance(context).getResearcherDAO();
+        dao.insert(this);
+    }
+
+    public List<Researcher> seekAll(Context context){
+        ResearcherDAO dao = Factory.getInstance(context).getResearcherDAO();
+        return dao.seekAll();
     }
 }
