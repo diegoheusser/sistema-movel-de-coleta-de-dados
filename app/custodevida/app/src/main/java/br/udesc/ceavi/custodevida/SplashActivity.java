@@ -12,7 +12,12 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.udesc.ceavi.custodevida.API.CustoVidaService;
 import br.udesc.ceavi.custodevida.model.Researcher;
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class SplashActivity extends Activity {
 
@@ -29,9 +34,28 @@ public class SplashActivity extends Activity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            Gson gson = new Gson();
 
+            String url = "http://localhost:8080/custovidawebservice";
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
 
+            CustoVidaService service = restAdapter.create(CustoVidaService.class);
+
+            String option = "seekall";
+            service.seekResearchers(option, new Callback<List<Researcher>>() {
+                @Override
+                public void success(List<Researcher> researchers, Response response) {
+                    Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG);
+                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(i);
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Toast.makeText(getApplicationContext(),"failure",Toast.LENGTH_LONG);
+                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                    startActivity(i);
+                }
+            });
             return null;
         }
     }
