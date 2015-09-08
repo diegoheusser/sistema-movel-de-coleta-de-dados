@@ -35,7 +35,7 @@ public class SplashActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = "http://localhost:8080/custovidawebservice";
+            String url = "http://10.1.1.198:8080/custovidawebservice";
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
 
             CustoVidaService service = restAdapter.create(CustoVidaService.class);
@@ -44,14 +44,16 @@ public class SplashActivity extends Activity {
             service.seekResearchers(option, new Callback<List<Researcher>>() {
                 @Override
                 public void success(List<Researcher> researchers, Response response) {
-                    Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_LONG);
+                    for(Researcher r: researchers){
+                        System.out.println("--->  "+r.toString());
+                    }
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Toast.makeText(getApplicationContext(),"failure",Toast.LENGTH_LONG);
+                    System.out.println("---> "+error.toString());
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
                 }

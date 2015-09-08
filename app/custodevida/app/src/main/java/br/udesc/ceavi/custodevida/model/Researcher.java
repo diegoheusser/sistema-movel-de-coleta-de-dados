@@ -56,4 +56,14 @@ public class Researcher {
         ResearcherDAO dao = Factory.getInstance(context).getResearcherDAO();
         return dao.seekAll();
     }
+
+    @Override
+    public String toString() {
+        return "Researcher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", user='" + user + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
