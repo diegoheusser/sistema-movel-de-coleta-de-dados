@@ -35,8 +35,9 @@ public class SplashActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = "http://10.1.1.198:8080/custovidawebservice";
+            String url = "http://localhost:8080/custovidawebservice";
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+
 
             CustoVidaService service = restAdapter.create(CustoVidaService.class);
 
