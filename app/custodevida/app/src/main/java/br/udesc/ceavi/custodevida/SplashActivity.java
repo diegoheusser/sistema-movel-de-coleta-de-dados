@@ -1,18 +1,19 @@
 package br.udesc.ceavi.custodevida;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import br.udesc.ceavi.custodevida.API.CustoVidaService;
+import br.udesc.ceavi.custodevida.retrofit.response.ResearcherResponse;
+import br.udesc.ceavi.custodevida.retrofit.service.ResearcherService;
 import br.udesc.ceavi.custodevida.model.Researcher;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -35,18 +36,21 @@ public class SplashActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            String url = "http://localhost:8080/custovidawebservice";
+            //When use emulator change localhost by 10.0.2.2
+            String url = "http://10.0.2.2:8084/custovidawebservice";
             RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
 
-
-            CustoVidaService service = restAdapter.create(CustoVidaService.class);
+            ResearcherService service = restAdapter.create(ResearcherService.class);
 
             String option = "seekall";
-            service.seekResearchers(option, new Callback<List<Researcher>>() {
+            service.seekResearchers(option, new Callback<ResearcherResponse>() {
                 @Override
-                public void success(List<Researcher> researchers, Response response) {
-                    for(Researcher r: researchers){
-                        System.out.println("--->  "+r.toString());
+                public void success(ResearcherResponse obj, Response response) {
+                    System.out.println("obj -> "+obj.toString());
+                    List<Researcher> list = obj.getResearcherList();
+                    System.out.println("list -> "+ list.toString());
+                    for(Researcher r: list){
+                        r.save(SplashActivity.this);
                     }
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
@@ -54,7 +58,8 @@ public class SplashActivity extends Activity {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    System.out.println("---> "+error.toString());
+                    System.out.println(error.toString());
+                    Toast.makeText(SplashActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
                 }
