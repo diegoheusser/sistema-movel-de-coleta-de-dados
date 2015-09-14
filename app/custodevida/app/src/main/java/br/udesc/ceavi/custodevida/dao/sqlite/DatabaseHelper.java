@@ -5,68 +5,78 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import br.udesc.ceavi.custodevida.dao.core.DatabaseDefinitions;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_TABLE_ITEM =
-            "CREATE TABLE item ( " +
-            "_id INTEGER PRIMARY KEY, " +
-            "description TEXT NOT NULL, " +
-            "identifier INTEGER NOT NULL " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_ITEM + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_ITEM[0] + " INTEGER PRIMARY KEY, " +
+            DatabaseDefinitions.COLUMNS_NAMES_ITEM[1] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_ITEM[2] + " INTEGER NOT NULL " +
             ") ";
     private static final String SQL_CREATE_TABLE_SOURCE =
-            "CREATE TABLE source ( " +
-            "_id INTEGER PRIMARY KEY, " +
-            "description TEXT NOT NULL, " +
-            "localization TEXT NOT NULL " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_SOURCE + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_SOURCE[0] + " INTEGER PRIMARY KEY, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SOURCE[1] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SOURCE[2] + " TEXT NOT NULL " +
             ") ";
     private static final String SQL_CREATE_TABLE_RESEARCHER =
-            "CREATE TABLE researcher ( " +
-            "_id INTEGER PRIMARY KEY, " +
-            "name TEXT NOT NULL, " +
-            "user TEXT NOT NULL, " +
-            "password TEXT NOT NULL " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_RESEARCHER + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[0] + " INTEGER PRIMARY KEY, " +
+            DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[1] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[2] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[3] + " TEXT NOT NULL " +
             ") ";
     private static final String SQL_CREATE_TABLE_SOURCE_RESEARCHER =
-            "CREATE TABLE source_researcher ( " +
-            "source_id INTEGER, " +
-            "researcher_id INTEGER, " +
-            "PRIMARY KEY (source_id, researcher_id), " +
-            "FOREIGN KEY(source_id) REFERENCES source(_id), " +
-            "FOREIGN KEY(researcher_id) REFERENCES researcher(_id)  " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_SOURCE_RESOURCE + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[0] + " INTEGER, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[1] + " INTEGER, " +
+            "PRIMARY KEY (" + DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[0] +
+                    ", " + DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[1] + "), " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[0] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_SOURCE + "(" + DatabaseDefinitions.COLUMNS_NAMES_SOURCE[0] + "), " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_SOURCE_RESEARCHER[1] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_RESEARCHER + "(" + DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[0] + ")  " +
             ") ";
     private static final String SQL_CREATE_TABLE_CONTROL =
-            "CREATE TABLE control ( " +
-            "_id INTEGER PRIMARY KEY, " +
-            "emission_date TEXT NOT NULL, " +
-            "percentage INTEGER DEFAULT 0, " +
-            "source_id INTEGER NOT NULL, " +
-            "researcher_id INTEGER NOT NULL, " +
-            "FOREIGN KEY(source_id) REFERENCES source(_id), " +
-            "FOREIGN KEY(researcher_id) REFERENCES researcher(_id) " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_CONTROL + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[0] + " INTEGER PRIMARY KEY, " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[1] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[2] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[3] + " INTEGER DEFAULT 0, " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[4] + " INTEGER NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_CONTROL[5] + " INTEGER NOT NULL, " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_CONTROL[4] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_SOURCE + "(" + DatabaseDefinitions.COLUMNS_NAMES_SOURCE[0] + "), " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_CONTROL[5] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_RESEARCHER + "(" + DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[0] + ") " +
             ") ";
     private static final String SQL_CREATE_TABLE_SEARCH =
-            "CREATE TABLE search ( " +
-            "_id INTEGER PRIMARY KEY, " +
-            "old_date TEXT NOT NULL, " +
-            "old_brand TEXT NOT NULL, " +
-            "old_specification TEXT NOT NULL, " +
-            "old_price REAL NOT NULL, " +
-            "new_date TEXT, " +
-            "new_brand TEXT, " +
-            "new_specification TEXT, " +
-            "new_price REAL, " +
-            "item_id INTEGER NOT NULL, " +
-            "control_id INTEGER NOT NULL, " +
-            "FOREIGN KEY(item_id) REFERENCES item(_id), " +
-            "FOREIGN KEY(control_id) REFERENCES control(_id) " +
+            "CREATE TABLE " + DatabaseDefinitions.TABLE_NAME_SEARCH + " ( " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[0] + " INTEGER PRIMARY KEY, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[1] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[2] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[3] + " TEXT NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[4] + " REAL NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[5] + " TEXT, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[6] + " TEXT, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[7] + " TEXT, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[8] + " REAL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[9] + " INTEGER NOT NULL, " +
+            DatabaseDefinitions.COLUMNS_NAMES_SEARCH[10] + " INTEGER NOT NULL, " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_SEARCH[9] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_ITEM + "(" + DatabaseDefinitions.COLUMNS_NAMES_ITEM[0] + "), " +
+            "FOREIGN KEY(" + DatabaseDefinitions.COLUMNS_NAMES_SEARCH[10] + ") REFERENCES " +
+                    DatabaseDefinitions.TABLE_NAME_CONTROL + "(" + DatabaseDefinitions.COLUMNS_NAMES_CONTROL[0] + ") " +
             ") ";
-    private static final String SQL_DROP_TABLE_ITEM = "DROP TABLE IF EXISTS item; ";
-    private static final String SQL_DROP_TABLE_SOURCE = "DROP TABLE IF EXISTS source; ";
-    private static final String SQL_DROP_TABLE_RESEARCHER = "DROP TABLE IF EXISTS researcher; ";
-    private static final String SQL_DROP_TABLE_SOURCE_RESEARCHER = "DROP TABLE IF EXISTS source_researcher; ";
-    private static final String SQL_DROP_TABLE_CONTROL = "DROP TABLE IF EXISTS control; ";
-    private static final String SQL_DROP_TABLE_SEARCH = "DROP TABLE IF EXISTS search; ";
-    private static final int DATABASE_VERSION = 6;
+    private static final String SQL_DROP_TABLE_ITEM = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_ITEM;
+    private static final String SQL_DROP_TABLE_SOURCE = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_SOURCE;
+    private static final String SQL_DROP_TABLE_RESEARCHER = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_RESEARCHER;
+    private static final String SQL_DROP_TABLE_SOURCE_RESEARCHER = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_SOURCE_RESOURCE;
+    private static final String SQL_DROP_TABLE_CONTROL = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_CONTROL;
+    private static final String SQL_DROP_TABLE_SEARCH = "DROP TABLE IF EXISTS " + DatabaseDefinitions.TABLE_NAME_SEARCH;
+    private static final int DATABASE_VERSION = 7;
     private static final String DATABASE_NAME = "custodevida";
 
     public DatabaseHelper(Context context) {

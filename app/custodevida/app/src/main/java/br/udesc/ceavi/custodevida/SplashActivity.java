@@ -22,8 +22,6 @@ import retrofit.client.Response;
 
 public class SplashActivity extends Activity {
 
-    private List<Researcher> researchers = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +44,18 @@ public class SplashActivity extends Activity {
             service.seekResearchers(option, new Callback<ResearcherResponse>() {
                 @Override
                 public void success(ResearcherResponse obj, Response response) {
-                    System.out.println("obj -> "+obj.toString());
-                    List<Researcher> list = obj.getResearcherList();
-                    System.out.println("list -> "+ list.toString());
-                    for(Researcher r: list){
-                        r.save(SplashActivity.this);
+                    List<Researcher> oldResearchers = Researcher.seekAll(SplashActivity.this);
+                    List<Researcher> newResearchers = obj.getResearcherList();
+                    System.out.println(oldResearchers.toString());
+                    System.out.println(newResearchers.toString());
+                    for(Researcher r: newResearchers){
+                        if(!oldResearchers.contains(r)){
+                            if(r.onTheList(oldResearchers)){
+                                r.update(SplashActivity.this);
+                            } else {
+                                r.save(SplashActivity.this);
+                            }
+                        }
                     }
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
@@ -59,7 +64,7 @@ public class SplashActivity extends Activity {
                 @Override
                 public void failure(RetrofitError error) {
                     System.out.println(error.toString());
-                    Toast.makeText(SplashActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SplashActivity.this, "Offline", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(i);
                 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import br.udesc.ceavi.custodevida.dao.core.DatabaseDefinitions;
 import br.udesc.ceavi.custodevida.dao.sqlite.DatabaseHelper;
 
 public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO<T> {
@@ -27,6 +28,7 @@ public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO
     protected abstract String[] getColumnsNames();
     protected abstract List<T> getList(Cursor c);
     protected abstract ContentValues getContentValues(T t);
+    protected abstract int getId(T t);
 
     @Override
     public void insert(T t){
@@ -34,12 +36,34 @@ public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = getContentValues(t);
 
-        long newRowId;
-        newRowId = db.insert(getTableName(),null,values);
+        db.insert(getTableName(),null,values);
 
         db.close();
         dbHelper.close();
 
+    }
+
+    @Override
+    public void delete(T t) {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        db.delete(getTableName(), getColumnsNames()[0]+" = ?", new String[]{String.valueOf(getId(t))});
+
+        db.close();
+        dbHelper.close();
+    }
+
+    @Override
+    public void update(T t) {
+        DatabaseHelper dbHelper = new DatabaseHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = getContentValues(t);
+
+        db.update(getTableName(),values,getColumnsNames()[0] + " = ?",new String[]{String.valueOf(getId(t))});
+
+        db.close();
+        dbHelper.close();
     }
 
     @Override
@@ -59,4 +83,5 @@ public abstract class SQLiteStandardDAO<T extends Object> implements StandardDAO
 
         return list;
     }
+
 }

@@ -29,15 +29,16 @@ public class SQLiteResearcherDAO extends SQLiteStandardDAO<Researcher> implement
                 getTableName(),
                 columnsNames,
                 "user = ? AND password = ?",
-                new String[]{user,password},
-                null, null,null);
-        cursor.moveToFirst();
-        ContentValues values  = new ContentValues();
-        Researcher r = new Researcher();
-        r.setId(cursor.getInt(0));
-        r.setName(cursor.getString(1));
-        r.setUser(cursor.getString(2));
-        r.setPassword(cursor.getString(3));
+                new String[]{user, password},
+                null, null, null);
+        Researcher r = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            r = new Researcher();
+            r.setId(cursor.getInt(0));
+            r.setName(cursor.getString(1));
+            r.setUser(cursor.getString(2));
+            r.setPassword(cursor.getString(3));
+        }
         cursor.close();
         db.close();
         dbHelper.close();
@@ -52,7 +53,7 @@ public class SQLiteResearcherDAO extends SQLiteStandardDAO<Researcher> implement
 
     @Override
     protected String[] getColumnsNames() {
-        return DatabaseDefinitions.COLUMNS_NAMES_RESEARCHERS;
+        return DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER;
     }
 
     @Override
@@ -78,6 +79,11 @@ public class SQLiteResearcherDAO extends SQLiteStandardDAO<Researcher> implement
         values.put("user", r.getUser());
         values.put("password", r.getPassword());
         return values;
+    }
+
+    @Override
+    protected int getId(Researcher researcher) {
+        return researcher.getId();
     }
 
 }
