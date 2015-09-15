@@ -16,19 +16,6 @@ import javax.ws.rs.core.MediaType;
 public class ResearcherResource {
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String respondAsReady() {
-        List<Researcher> researchers;
-        try {
-            researchers = Researcher.seekAll();
-        } catch (Exception ex) {
-            researchers = new ArrayList<>();
-        }
-
-        return researchers.toString();
-    }
-
-    @GET
     @Path("seekall")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Researcher> seekAll() {

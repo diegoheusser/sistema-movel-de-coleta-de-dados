@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import br.udesc.ceavi.custodevida.base.AppContext;
 import br.udesc.ceavi.custodevida.retrofit.response.ResearcherResponse;
 import br.udesc.ceavi.custodevida.retrofit.service.ResearcherService;
 import br.udesc.ceavi.custodevida.model.Researcher;
@@ -34,9 +35,7 @@ public class SplashActivity extends Activity {
         @Override
         protected Void doInBackground(Void... params) {
 
-            //When use emulator change localhost by 10.0.2.2
-            String url = "http://10.0.2.2:8084/custovidawebservice";
-            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(url).build();
+            RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(AppContext.SERVICE_URL).build();
 
             ResearcherService service = restAdapter.create(ResearcherService.class);
 

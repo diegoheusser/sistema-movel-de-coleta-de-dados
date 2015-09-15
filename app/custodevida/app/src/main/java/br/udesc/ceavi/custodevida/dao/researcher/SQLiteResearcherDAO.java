@@ -74,10 +74,10 @@ public class SQLiteResearcherDAO extends SQLiteStandardDAO<Researcher> implement
     @Override
     protected ContentValues getContentValues(Researcher r) {
         ContentValues values = new ContentValues();
-        values.put("_id", r.getId());
-        values.put("name", r.getName());
-        values.put("user", r.getUser());
-        values.put("password", r.getPassword());
+        values.put(DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[0], r.getId());
+        values.put(DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[1], r.getName());
+        values.put(DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[2], r.getUser());
+        values.put(DatabaseDefinitions.COLUMNS_NAMES_RESEARCHER[3], r.getPassword());
         return values;
     }
 

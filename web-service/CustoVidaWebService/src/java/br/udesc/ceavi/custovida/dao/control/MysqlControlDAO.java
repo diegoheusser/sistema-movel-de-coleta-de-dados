@@ -22,7 +22,7 @@ public class MysqlControlDAO implements ControlDAO {
     public List<Control> seekControlsByResearcher(int researcherId) throws Exception {
         Connection con = MysqlConnection.getConnection();
         String select = "SELECT * FROM pesquisacontrole as p "
-                + "INNER JOIN fonte a f ON f.fonteid = p.fonteid "
+                + "INNER JOIN fonte as f ON f.fonteid = p.fonteid "
                 + "INNER JOIN usuario as u ON u.usuarioid = p.usuarioid "
                 + "WHERE p.aberto = 1 AND u.usuarioid = " + researcherId + " ";
         Statement st = con.createStatement();

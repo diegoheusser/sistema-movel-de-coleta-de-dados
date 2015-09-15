@@ -15,6 +15,7 @@ public class Control {
     private int percentage;
     private Source source;
     private Researcher researcher;
+    private List<Search> searches;
     
     public static List<Control> seekControlsByResearcher(int researcherId) throws Exception{
         ControlDAO dao = DAOFactory.getInstance().getControlDAO();
@@ -72,6 +73,14 @@ public class Control {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public List<Search> getSearches() {
+        return searches;
+    }
+
+    public void setSearches(List<Search> searches) {
+        this.searches = searches;
     }
     
 }
