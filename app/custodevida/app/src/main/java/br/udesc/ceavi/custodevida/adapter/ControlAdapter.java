@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
@@ -12,15 +13,30 @@ import java.util.List;
 import br.udesc.ceavi.custodevida.R;
 import br.udesc.ceavi.custodevida.model.Control;
 
-public class ControlAdapter extends ArrayAdapter<Control> {
+public class ControlAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<Control> values;
 
     public ControlAdapter(Context context, List<Control> values){
-        super(context, -1, values);
+        super();
         this.context = context;
         this.values = values;
+    }
+
+    @Override
+    public int getCount() {
+        return values.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return values.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
@@ -34,9 +50,9 @@ public class ControlAdapter extends ArrayAdapter<Control> {
                 view.findViewById(R.id.list_activity_control_text_view_description);
         TextView textViewLocalization = (TextView)
                 view.findViewById(R.id.list_activity_control_text_view_localization);
-        textViewPercentage.setText(String.valueOf(values.get(position).getPercentage()));
+        textViewPercentage.setText(String.valueOf(values.get(position).getPercentage())+"%");
         textViewDescription.setText(values.get(position).getSource().getDescription());
         textViewLocalization.setText(values.get(position).getSource().getLocalization());
-        return super.getView(position, convertView, parent);
+        return view;
     }
 }

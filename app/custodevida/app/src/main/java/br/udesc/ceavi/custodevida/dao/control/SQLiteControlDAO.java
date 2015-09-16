@@ -42,14 +42,18 @@ public class SQLiteControlDAO extends SQLiteStandardDAO<Control> implements Cont
                 Control control = new Control();
                 control.setId(c.getInt(0));
                 try {
-                    control.setEmissionDate(sdf.parse(c.getString(1)));
-                    control.setDeliveryDate(sdf.parse(c.getString(2)));
+                    String emissionDate = c.getString(1);
+                    String deliveryDate = c.getString(2);
+                    control.setEmissionDate(emissionDate.equals("NULL")?null:sdf.parse(emissionDate));
+                    control.setDeliveryDate(deliveryDate.equals("NULL")?null:sdf.parse(deliveryDate));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 control.setPercentage(c.getInt(3));
                 Source s = new Source();
                 s.setId(c.getInt(4));
+                s.setDescription(c.getString(c.getColumnIndex("description")));
+                s.setLocalization(c.getString(c.getColumnIndex("localization")));
                 control.setSource(s);
                 Researcher r = new Researcher();
                 r.setId(c.getInt(5));
@@ -65,8 +69,16 @@ public class SQLiteControlDAO extends SQLiteStandardDAO<Control> implements Cont
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ContentValues values = new ContentValues();
         values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[0],control.getId());
-        values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[1], sdf.format(control.getEmissionDate()));
-        values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[2], sdf.format(control.getDeliveryDate()));
+        if(control.getEmissionDate()!=null) {
+            values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[1], sdf.format(control.getEmissionDate()));
+        } else {
+            values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[1], "NULL");
+        }
+        if(control.getDeliveryDate()!=null) {
+            values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[2], sdf.format(control.getDeliveryDate()));
+        } else {
+            values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[2], "NULL");
+        }
         values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[3], control.getPercentage());
         values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[4], control.getSource().getId());
         values.put(DatabaseDefinitions.COLUMNS_NAMES_CONTROL[5], control.getResearcher().getId());
@@ -83,10 +95,9 @@ public class SQLiteControlDAO extends SQLiteStandardDAO<Control> implements Cont
         DatabaseHelper dbHelper = new DatabaseHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String[] columnsNames = getColumnsNames();
-        Cursor cursor = db.query(getTableName(), columnsNames,
-                DatabaseDefinitions.COLUMNS_NAMES_CONTROL[5]+" = ?",
-                new String[]{String.valueOf(researcherID)},null,null,null);
+        String select = "SELECT * FROM control as c JOIN source as s ON c.source_id = s._id WHERE c.researcher_id = ?";
+
+        Cursor cursor = db.rawQuery(select, new String[]{String.valueOf(researcherID)});
 
         List<Control> list = getList(cursor);
 

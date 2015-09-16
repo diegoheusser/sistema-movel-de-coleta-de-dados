@@ -8,7 +8,7 @@ import retrofit.http.Path;
 
 public interface ControlService {
 
-    @GET("/rest/control/{option}/{researcherid}")
-    void seekControlsByResearcher(@Path("option") String option, @Path("researcherid") int researcherid, Callback<ControlResponse> cb);
+    @GET("/rest/control/seekall/{researcherid}")
+    void seekControlsByResearcher(@Path("researcherid") int researcherid, Callback<ControlResponse> cb);
 
 }

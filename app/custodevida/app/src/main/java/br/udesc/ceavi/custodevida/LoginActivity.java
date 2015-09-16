@@ -17,11 +17,15 @@ import java.util.List;
 
 import br.udesc.ceavi.custodevida.base.AppContext;
 import br.udesc.ceavi.custodevida.model.Control;
+import br.udesc.ceavi.custodevida.model.Model;
 import br.udesc.ceavi.custodevida.model.Researcher;
+import br.udesc.ceavi.custodevida.model.Source;
 import br.udesc.ceavi.custodevida.retrofit.response.ControlResponse;
 import br.udesc.ceavi.custodevida.retrofit.response.ResearcherResponse;
+import br.udesc.ceavi.custodevida.retrofit.response.SourceResponse;
 import br.udesc.ceavi.custodevida.retrofit.service.ControlService;
 import br.udesc.ceavi.custodevida.retrofit.service.ResearcherService;
+import br.udesc.ceavi.custodevida.retrofit.service.SourceService;
 import br.udesc.ceavi.custodevida.util.MD5;
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -67,22 +71,64 @@ public class LoginActivity extends Activity {
     }
 
     private class ControlAsyncTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Intent i = new Intent(LoginActivity.this,LoadActivity.class);
+            startActivity(i);
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
             RestAdapter restAdapter = new RestAdapter.Builder().
                     setEndpoint(AppContext.SERVICE_URL).setConverter(new GsonConverter(gson)).build();
 
-            ControlService service = restAdapter.create(ControlService.class);
+            SourceService sourceService = restAdapter.create(SourceService.class);
+            sourceService.seekAll(new Callback<SourceResponse>() {
+                @Override
+                public void success(SourceResponse sourceResponse, Response response) {
+                    List<Source> newSources = sourceResponse.getSourceList();
+                    List<Source> oldSources = Source.seekAll(LoginActivity.this);
+                    for(Source s: newSources){
+                        if(!oldSources.contains(s)){
+                            if(s.onTheList(oldSources)){
+                                s.update(LoginActivity.this);
+                            } else {
+                                s.save(LoginActivity.this);
+                            }
+                        }
+                    }
+                }
 
-            String option = "seekall";
-            service.seekControlsByResearcher(option, AppContext.RESEARCHER.getId(), new Callback<ControlResponse>() {
+                @Override
+                public void failure(RetrofitError error) {
+                    error.printStackTrace();
+                }
+            });
+
+            ControlService service = restAdapter.create(ControlService.class);
+            service.seekControlsByResearcher(AppContext.RESEARCHER.getId(), new Callback<ControlResponse>() {
                 @Override
                 public void success(ControlResponse controlResponse, Response response) {
-                    System.out.println("SUCCESS -->"+controlResponse.toString());
-                    Intent i = new Intent(LoginActivity.this,ControlActivity.class);
-                    startActivity(i);
+                    List<Control> newControls = controlResponse.getControlList();
+                    List<Control> oldControls = Control.seekAllByResearcher(
+                            LoginActivity.this, AppContext.RESEARCHER.getId());
+                    for(Control c: newControls){
+                        if(!oldControls.contains(c)){
+                            if(c.onTheList(oldControls)){
+                                c.update(LoginActivity.this);
+                            } else {
+                                c.save(LoginActivity.this);
+                            }
+                        }
+                    }
+
                 }
 
                 @Override
@@ -91,6 +137,13 @@ public class LoginActivity extends Activity {
                 }
             });
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent i = new Intent(LoginActivity.this,ControlActivity.class);
+            startActivity(i);
         }
     }
 

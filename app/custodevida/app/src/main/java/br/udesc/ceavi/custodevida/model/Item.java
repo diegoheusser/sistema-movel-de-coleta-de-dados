@@ -1,11 +1,12 @@
 package br.udesc.ceavi.custodevida.model;
 
-public class Item {
+public class Item extends Model {
 
     private int id;
     private String description;
     private int identifier;
 
+    @Override
     public int getId() {
         return id;
     }

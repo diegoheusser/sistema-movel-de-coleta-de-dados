@@ -2,7 +2,7 @@ package br.udesc.ceavi.custodevida.model;
 
 import java.util.Date;
 
-public class Search {
+public class Search extends Model {
 
     private int id;
     private Date oldDate;
@@ -16,6 +16,7 @@ public class Search {
     private Item item;
     private Control control;
 
+    @Override
     public int getId() {
         return id;
     }

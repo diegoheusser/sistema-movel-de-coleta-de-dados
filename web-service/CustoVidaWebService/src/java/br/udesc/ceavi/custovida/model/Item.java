@@ -1,5 +1,8 @@
 package br.udesc.ceavi.custovida.model;
 
+import br.udesc.ceavi.custovida.dao.core.DAOFactory;
+import br.udesc.ceavi.custovida.dao.item.ItemDAO;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -31,5 +34,10 @@ public class Item {
 
     public void setIdentifier(int identifier) {
         this.identifier = identifier;
+    }
+    
+    public static List<Item> seekAll() throws Exception {
+        ItemDAO dao = DAOFactory.getInstance().getItemDAO();
+        return dao.seekAll();
     }
 }

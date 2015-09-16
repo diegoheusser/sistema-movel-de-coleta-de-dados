@@ -1,11 +1,11 @@
 package br.udesc.ceavi.custovida.resource;
 
 import br.udesc.ceavi.custovida.model.Control;
+import br.udesc.ceavi.custovida.model.Item;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -13,22 +13,21 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Diego Heusser
  */
-@Path("/control")
-public class ControlResource {
+@Path("/item")
+public class ItemResource {
 
     @GET
-    @Path("seekall/{userid}")
+    @Path("seekall")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Control> seekAll(@PathParam("userid") int userid) {
-
-        List<Control> controls;
+    public List<Item> seekAll() {
+        List<Item> items;
         try {
-            controls = Control.seekControlsByResearcher(userid);
+            items = Item.seekAll();
         } catch (Exception ex) {
-            controls = new ArrayList<>();
+            items = new ArrayList<>();
         }
 
-        return controls;
+        return items;
     }
 
 }

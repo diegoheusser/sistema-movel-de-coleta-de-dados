@@ -6,10 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.google.gson.internal.LinkedTreeMap;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import br.udesc.ceavi.custodevida.base.AppContext;
@@ -39,8 +35,7 @@ public class SplashActivity extends Activity {
 
             ResearcherService service = restAdapter.create(ResearcherService.class);
 
-            String option = "seekall";
-            service.seekResearchers(option, new Callback<ResearcherResponse>() {
+            service.seekResearchers( new Callback<ResearcherResponse>() {
                 @Override
                 public void success(ResearcherResponse obj, Response response) {
                     List<Researcher> oldResearchers = Researcher.seekAll(SplashActivity.this);
@@ -56,19 +51,23 @@ public class SplashActivity extends Activity {
                             }
                         }
                     }
-                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                    startActivity(i);
+
                 }
 
                 @Override
                 public void failure(RetrofitError error) {
                     System.out.println(error.toString());
                     Toast.makeText(SplashActivity.this, "Offline", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                    startActivity(i);
                 }
             });
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+            startActivity(i);
         }
     }
 }

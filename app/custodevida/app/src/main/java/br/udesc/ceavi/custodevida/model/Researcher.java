@@ -9,13 +9,14 @@ import br.udesc.ceavi.custodevida.SplashActivity;
 import br.udesc.ceavi.custodevida.dao.core.Factory;
 import br.udesc.ceavi.custodevida.dao.researcher.ResearcherDAO;
 
-public class Researcher {
+public class Researcher extends Model {
 
     private int id;
     private String name;
     private String user;
     private String password;
 
+    @Override
     public int getId() {
         return id;
     }
@@ -89,15 +90,6 @@ public class Researcher {
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
-    }
-
-    public boolean onTheList(List<Researcher> list) {
-        for(Researcher r : list){
-            if(id==r.getId()){
-                return true;
-            }
-        }
-        return false;
     }
 
     public void update(Context context) {
